@@ -67,7 +67,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
-            display: none; /* ホーム画面では非表示 */
+            display: none;
         }
 
         .home-btn:hover {
@@ -80,7 +80,6 @@
             padding: 0 20px;
         }
 
-        /* 画面切り替えの制御 */
         .view {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
@@ -95,7 +94,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ホーム画面のメニューボタン */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -132,7 +130,6 @@
             line-height: 1.6;
         }
 
-        /* コントロールパネル周り */
         .controls {
             background-color: var(--panel-bg);
             padding: 20px;
@@ -186,7 +183,6 @@
 
         select:focus, input:focus { border-color: var(--accent); }
 
-        /* チャートエリア */
         .chart-layout {
             display: flex;
             flex-wrap: wrap;
@@ -230,7 +226,6 @@
             padding-bottom: 10px;
         }
 
-        /* チェックボックス */
         .checkbox-container {
             display: flex;
             flex-wrap: wrap;
@@ -286,7 +281,6 @@
             margin-bottom: 20px;
         }
 
-        /* テーブル用スタイル（基準値表） */
         .criteria-table-wrapper {
             overflow-x: auto;
             background-color: var(--panel-bg);
@@ -336,9 +330,7 @@
             background-color: var(--bg-color);
         }
 
-        /* ==============================================
-           個票印刷（A4対応）のスタイル設計
-           ============================================== */
+        /* 個票印刷（A4対応）のスタイル */
         .print-sheet {
             background-color: var(--panel-bg);
             border: 1px solid var(--border-color);
@@ -438,7 +430,6 @@
             font-weight: bold;
         }
 
-        /* 印刷設定メディアクエリ */
         @media print {
             body {
                 background-color: #fff !important;
@@ -470,7 +461,6 @@
                 width: 100% !important;
                 max-width: 100% !important;
             }
-            /* 背景色の強制出力設定 */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -486,12 +476,8 @@
     </header>
 
     <div class="container">
-        <!-- 読み込みメッセージ -->
         <div id="status-message" class="message">データを読み込み中...</div>
 
-        <!-- ==============================================
-             ビュー1: ホーム画面
-             ============================================== -->
         <div id="view-home" class="view active">
             <div class="menu-grid">
                 <div class="menu-card" onclick="switchView('personal')">
@@ -513,9 +499,6 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             ビュー2: 個人記録の確認画面
-             ============================================== -->
         <div id="view-personal" class="view">
             <div class="controls">
                 <div class="control-row" style="align-items: center;">
@@ -523,12 +506,10 @@
                         <label>選手を選択</label>
                         <select id="personal-player" onchange="updatePersonalView()"></select>
                     </div>
-                    <!-- 予想球速表示エリア -->
                     <div id="estimated-pitch-speed" style="color: var(--danger); font-weight: bold; display: flex; align-items: center; gap: 8px; margin-left: 10px; background: #fff0f0; padding: 10px 20px; border-radius: 8px; border: 1px solid #ffcccc;">
                         ⚾ 予想球速: -- km/h
                     </div>
                 </div>
-                <!-- 基準ライン選択チェックボックス -->
                 <div class="checkbox-container" style="border-top: 1px dashed #ccc; padding-top: 15px; margin-top: 15px;">
                     <div class="checkbox-section" style="flex: none; width: 100%;">
                         <h3 style="margin-bottom: 8px;">目標基準ラインと比較（複数選択可）</h3>
@@ -538,7 +519,6 @@
             </div>
 
             <div class="chart-layout">
-                <!-- レーダーチャート（分野バランス） -->
                 <div class="chart-wrapper radar-container">
                     <h3 class="section-title">📊 分野別バランス分析 (6点満点)</h3>
                     <div style="margin-bottom: 10px; text-align: center;">
@@ -548,7 +528,6 @@
                     <canvas id="radarChart"></canvas>
                 </div>
 
-                <!-- 折れ線グラフ（推移） -->
                 <div class="chart-wrapper line-container">
                     <h3 class="section-title">📈 種目別 記録推移</h3>
                     <div class="control-row" style="margin-bottom: 10px;">
@@ -569,9 +548,6 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             ビュー3: 個人間記録の比較画面
-             ============================================== -->
         <div id="view-compare" class="view">
             <div class="controls">
                 <div class="control-row">
@@ -606,9 +582,6 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             ビュー4: 各種記録数値と球速（基準値表）
-             ============================================== -->
         <div id="view-criteria" class="view">
             <h3 class="section-title">📋 各種記録数値と予想球速 基準表</h3>
             <div class="criteria-table-wrapper">
@@ -648,9 +621,6 @@
             </div>
         </div>
 
-        <!-- ==============================================
-             ビュー5: 個票の印刷
-             ============================================== -->
         <div id="view-print" class="view">
             <div class="controls no-print">
                 <div class="control-row" style="align-items: center;">
@@ -669,7 +639,6 @@
                 </div>
             </div>
 
-            <!-- A4印刷対象エリア -->
             <div id="print-sheet" class="print-sheet">
                 <div class="print-header">
                     <h2>体力測定個票 <span>REPORT</span></h2>
@@ -698,7 +667,6 @@
                 <div class="print-table-section">
                     <h4>📋 測定種目 記録一覧</h4>
                     <div id="print-table-container">
-                        <!-- JSで動的にテーブルを挿入 -->
                     </div>
                 </div>
             </div>
@@ -712,9 +680,7 @@
     const TARGET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHBqWiCTvyfovUJ9i9xEKvjH9vj8zDNtbP5Nfly2WU2oinLIKuAb0SnjsGHbkkzS1fcU9Y9B-FwJe6/pub?gid=915344858&single=true&output=csv"; 
     // ==========================================
 
-    // Chart.js プラグインの登録
     Chart.register(ChartDataLabels);
-    // アノテーションプラグインは自動登録されるため手動登録は不要です
 
     const criteria = {
         "除脂肪指数": { 150: 22, 140: 21, 130: 20, 125: 19, 120: 18, 115: 17, type: "higher" },
@@ -756,7 +722,6 @@
     let allData = [];
     let availableMonths = [];
     
-    // チャートインスタンス
     let radarChartInst = null;
     let personalLineChartInst = null;
     let compareLineChartInst = null;
@@ -773,10 +738,8 @@
 2025-04,選手C,17,45,6.5,6,1.0,110,55,支持あり不可,2.0,4.4,×,×,×,×,△,×,×,△
 2025-05,選手C,17.5,48,6.8,8,1.2,120,60,支持あり困難,1.95,4.3,△,×,△,×,△,△,△,△`;
 
-    //    // --- データ正規化ユーティリティ（表記揺れや全角半角のブレを吸収） ---
     function normalizeValue(str) {
         if (typeof str !== 'string') return str;
-        // 全角英数字、ピリオド、コロンを半角に変換し、前後の空白を削除
         return str.trim().replace(/[Ａ-Ｚａ-ｚ０-９．：]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
         });
@@ -784,7 +747,6 @@
 
     function normalizeHeader(header) {
         let h = normalizeValue(header);
-        // スプレッドシート側の入力ブレを想定した強制マッピング
         if (h.includes("10m") || h.includes("10M") || h.includes("10ｍ")) return "10m";
         if (h.includes("30m") || h.includes("30M") || h.includes("30ｍ")) return "30m";
         if (h.includes("5kg") || h.includes("5KG") || h.includes("５ｋｇ")) return "5kgMB";
@@ -798,7 +760,6 @@
         loadData();
     };
 
-    // 画面切り替えロジック
     function switchView(viewId) {
         document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
         document.getElementById('view-' + viewId).classList.add('active');
@@ -815,10 +776,9 @@
     }
 
     function processParsedData(data) {
-        // 月の表記揺れ（YYYY-MやYYYY/M）をすべて YYYY-MM に正規化する
         data.forEach(row => {
             if (row['測定月']) {
-                let parts = row['測定月'].split(/[-/]/); // ハイフンかスラッシュで分割
+                let parts = row['測定月'].split(/[-/]/);
                 if (parts.length >= 2) {
                     row['測定月'] = `${parts[0]}-${parts[1].padStart(2, '0')}`;
                 }
@@ -870,7 +830,6 @@
         }
     }
 
-    // データ読み込み後のUI初期化
     function initUI() {
         const playerNames = [...new Set(allData.map(row => row['氏名']).filter(name => name))].sort();
         availableMonths = [...new Set(allData.map(row => row['測定月']).filter(m => m))].sort();
@@ -879,7 +838,6 @@
         const defaultEnd = availableMonths[availableMonths.length - 1] || '2025-09';
         const latestMonth = availableMonths[availableMonths.length - 1];
 
-        /* --- 個人用画面の初期化 --- */
         const pPlayer = document.getElementById('personal-player');
         pPlayer.innerHTML = '';
         playerNames.forEach(name => pPlayer.add(new Option(name, name)));
@@ -913,7 +871,6 @@
             plCbContainer.appendChild(lbl);
         });
 
-        /* --- 比較用画面の初期化 --- */
         const cEvent = document.getElementById('compare-event');
         cEvent.innerHTML = '';
         const scoreGroup = document.createElement('optgroup');
@@ -958,7 +915,6 @@
             lCbContainer.appendChild(lbl);
         });
 
-        /* --- 印刷用個票画面の初期化 --- */
         const printPlayerSelect = document.getElementById('print-player');
         printPlayerSelect.innerHTML = '';
         playerNames.forEach(name => printPlayerSelect.add(new Option(name, name)));
@@ -969,7 +925,6 @@
         if(latestMonth) printMonthSelect.value = latestMonth;
     }
 
-    // --- データ抽出・計算共通ロジック ---
     function calculateScore(eventName, value) {
         if (!value) return null;
         const crit = criteria[eventName];
@@ -1025,27 +980,18 @@
 
     function estimatePitchSpeed(score) {
         let speed = 0;
-        if (score >= 6) {
-            speed = 150 + (score - 6) * 10;
-        } else if (score >= 5) {
-            speed = 140 + (score - 5) * 10;
-        } else if (score >= 4) {
-            speed = 130 + (score - 4) * 10;
-        } else if (score >= 3) {
-            speed = 125 + (score - 3) * 5;
-        } else if (score >= 2) {
-            speed = 120 + (score - 2) * 5;
-        } else if (score >= 1) {
-            speed = 115 + (score - 1) * 5;
-        } else {
-            speed = 115 - (1 - score) * 5;
-        }
+        if (score >= 6) speed = 150 + (score - 6) * 10;
+        else if (score >= 5) speed = 140 + (score - 5) * 10;
+        else if (score >= 4) speed = 130 + (score - 4) * 10;
+        else if (score >= 3) speed = 125 + (score - 3) * 5;
+        else if (score >= 2) speed = 120 + (score - 2) * 5;
+        else if (score >= 1) speed = 115 + (score - 1) * 5;
+        else speed = 115 - (1 - score) * 5;
         return Math.floor(speed);
     }
 
     function extractData(targetName, eventSelectVal, labels) {
         const isScoreMode = eventSelectVal.startsWith('SCORE_');
-
         return labels.map(month => {
             const row = allData.find(d => d['氏名'] === targetName && d['測定月'] === month);
             if (!row) return null;
@@ -1082,9 +1028,6 @@
         return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     }
 
-    // ==============================================
-    // 個人記録の確認画面 アップデート
-    // ==============================================
     function updatePersonalView() {
         if(allData.length === 0) return;
         
@@ -1095,7 +1038,6 @@
         const end = document.getElementById('personal-end').value;
         const lines = Array.from(document.querySelectorAll('#personal-line-cb input:checked')).map(cb => cb.value);
 
-        // --- 予想球速の算出・表示 ---
         const avgScore = getOverallAvgScore(player, radarMonth);
         const speedDisplay = document.getElementById('estimated-pitch-speed');
         if (avgScore !== null) {
@@ -1105,7 +1047,6 @@
             speedDisplay.innerHTML = `⚾ 予想球速: -- km/h`;
         }
 
-        // --- レーダーチャートの描画 ---
         const groups = Object.keys(eventGroups);
         const radarData = groups.map(g => getGroupAvgScore(player, radarMonth, g) || 0);
 
@@ -1119,7 +1060,6 @@
             borderWidth: 2
         }];
 
-        // レーダーチャート用の基準ライン枠
         lines.forEach(l => {
             const lineVal = parseInt(l.match(/(\d+)キロライン/)[1]);
             let s = 1;
@@ -1129,7 +1069,7 @@
                 label: `【目標】${l}`,
                 data: groups.map(() => s),
                 backgroundColor: 'transparent',
-                borderColor: 'rgba(255, 85, 85, 0.7)', // 少し濃い赤色
+                borderColor: 'rgba(255, 85, 85, 0.7)',
                 borderWidth: 2,
                 borderDash: [4,4],
                 pointRadius: 0
@@ -1155,7 +1095,7 @@
                         color: function(context) { return context.dataset.label.includes('【目標】') ? '#666' : '#0088cc'; },
                         font: { weight: 'bold' },
                         formatter: (v, ctx) => {
-                            if (ctx.dataset.label.includes('【目標】')) return ''; // 目標ラインの数値は非表示
+                            if (ctx.dataset.label.includes('【目標】')) return '';
                             return v > 0 ? (Math.round(v*10)/10) : '';
                         }
                     }
@@ -1163,7 +1103,6 @@
             }
         });
 
-        // --- 折れ線グラフの描画 ---
         const labels = generateMonthRange(start, end);
         const displayLabels = labels.map(l => parseInt(l.split('-')[1]) + '月');
         const lineData = extractData(player, eventName, labels);
@@ -1178,7 +1117,6 @@
             borderWidth: 3, pointRadius: 6, tension: 0, spanGaps: true
         }];
 
-        // 基準ラインを横線（アノテーション）として生成
         const lineAnnotations = {};
         lines.forEach((l, idx) => {
             const lineVal = parseInt(l.match(/(\d+)キロライン/)[1]);
@@ -1191,48 +1129,21 @@
                     type: 'line',
                     yMin: yVal,
                     yMax: yVal,
-                    borderColor: 'rgba(255, 85, 85, 0.9)', // 濃くはっきりとした横線
+                    borderColor: 'rgba(255, 85, 85, 0.7)',
                     borderWidth: 2,
+                    borderDash: [5, 5],
                     label: {
                         display: true,
-                        content: l,
-                        position: 'start', // 線の左端にラベル表示
-                        backgroundColor: 'rgba(255, 85, 85, 0.9)',
-                        color: 'white',
-                        font: { size: 11, weight: 'bold' },
-                        padding: 4
+                        content: `【目標】${l}`,
+                        position: 'end',
+                        backgroundColor: 'rgba(255, 85, 85, 0.8)',
+                        font: { size: 10 }
                     }
                 };
             }
         });
 
         if(personalLineChartInst) personalLineChartInst.destroy();
-        
-        let yScaleConf = { grid: { color: '#e6f2f8' }, ticks: { color: '#666' }, offset: true };
-        if (isLower) yScaleConf.reverse = true;
-
-        if(isCategory) {
-            yScaleConf.type = 'category'; 
-            yScaleConf.labels = criteria[eventName].ranks;
-            yScaleConf.reverse = true;
-        } else {
-            yScaleConf.type = 'linear'; 
-            // 10mと30mスプリント走の軸表示範囲・刻み幅を固定
-            if (eventName === "10m") {
-                yScaleConf.min = 1.5;
-                yScaleConf.max = 3.0;
-                yScaleConf.ticks.stepSize = 0.1;
-            } else if (eventName === "30m") {
-                yScaleConf.min = 3.5;
-                yScaleConf.max = 5.5;
-                yScaleConf.ticks.stepSize = 0.1;
-            } else {
-                yScaleConf.grace = '10%';
-            }
-            // 無限小数を防ぐために小数点第2位で丸める
-            yScaleConf.ticks.callback = v => (Math.round(v * 100) / 100) + ' ' + unit;
-        }
-
         personalLineChartInst = new Chart(document.getElementById('personalLineChart').getContext('2d'), {
             type: 'line',
             data: { labels: displayLabels, datasets: lineDatasets },
@@ -1240,30 +1151,32 @@
                 responsive: true, maintainAspectRatio: false,
                 layout: { padding: { top: 20 } },
                 plugins: {
-                    legend: { display: true, position: 'top', labels: { font: { weight: 'bold' } } },
-                    // ここでアノテーション（横線）を適用
+                    legend: { position: 'top' },
                     annotation: { annotations: lineAnnotations },
                     datalabels: {
-                        align: 'top', anchor: 'end', offset: 4, font: { weight: 'bold', size: 11 },
-                        color: '#0088cc',
-                        formatter: (v) => {
-                            if(v === null) return '';
-                            return isCategory ? v : (Math.round(v*100)/100 + ' ' + unit);
-                        }
+                        align: 'top', anchor: 'end',
+                        color: '#0088cc', font: { weight: 'bold', size: 12 },
+                        formatter: v => v !== null ? v + unit : ''
                     }
                 },
-                scales: { x: { grid: { color: '#e6f2f8' } }, y: yScaleConf }
+                scales: {
+                    x: { grid: { color: '#e6f2f8' } },
+                    y: {
+                        grid: { color: '#e6f2f8' },
+                        reverse: isLower,
+                        type: isCategory ? 'category' : 'linear',
+                        labels: isCategory ? criteria[eventName].ranks : undefined,
+                        title: { display: unit !== "", text: `単位：${unit}` }
+                    }
+                }
             }
         });
     }
 
-    // ==============================================
-    // 個人間記録の比較画面 アップデート
-    // ==============================================
     function updateCompareView() {
         if(allData.length === 0) return;
 
-        const eventVal = document.getElementById('compare-event').value;
+        const eventName = document.getElementById('compare-event').value;
         const start = document.getElementById('compare-start').value;
         const end = document.getElementById('compare-end').value;
         const players = Array.from(document.querySelectorAll('#compare-player-cb input:checked')).map(cb => cb.value);
@@ -1271,34 +1184,34 @@
 
         const labels = generateMonthRange(start, end);
         const displayLabels = labels.map(l => parseInt(l.split('-')[1]) + '月');
-        const isScoreMode = eventVal.startsWith('SCORE_');
-        const isCategory = !isScoreMode && criteria[eventVal]?.type === 'category';
-        const isLower = !isScoreMode && criteria[eventVal]?.type === 'lower';
         
-        const datasets = [];
-        let colorIdx = 0;
+        const isScoreMode = eventName.startsWith('SCORE_');
+        const isCategory = !isScoreMode && criteria[eventName]?.type === 'category';
+        const isLower = !isScoreMode && criteria[eventName]?.type === 'lower';
+        const unit = isScoreMode ? "点" : (eventUnits[eventName] || "");
 
-        players.forEach(p => {
-            const c = palette[colorIdx % palette.length];
+        const datasets = [];
+        players.forEach((p, i) => {
+            const color = palette[i % palette.length];
             datasets.push({
-                label: p, data: extractData(p, eventVal, labels),
-                borderColor: c, backgroundColor: hexToRgba(c, 0.1),
-                borderWidth: 3, pointRadius: 6, tension: 0, spanGaps: true,
-                datalabels: { color: c }
+                label: p,
+                data: extractData(p, eventName, labels),
+                borderColor: color,
+                backgroundColor: hexToRgba(color, 0.1),
+                borderWidth: 2, pointRadius: 5, tension: 0, spanGaps: true
             });
-            colorIdx++;
         });
 
-        // 基準ラインを横線（アノテーション）として生成
         const lineAnnotations = {};
         lines.forEach((l, idx) => {
             const lineVal = parseInt(l.match(/(\d+)キロライン/)[1]);
             let yVal = null;
+            
             if (isScoreMode) {
                 if(lineVal === 150) yVal = 6; else if(lineVal === 140) yVal = 5; else if(lineVal === 130) yVal = 4;
-                else if(lineVal === 125) yVal = 3; else if(lineVal === 120) yVal = 2; else yVal = 1;
+                else if(lineVal === 125) yVal = 3; else if(lineVal === 120) yVal = 2; else if(lineVal === 115) yVal = 1;
             } else {
-                const crit = criteria[eventVal];
+                const crit = criteria[eventName];
                 if (crit) yVal = crit[lineVal];
             }
 
@@ -1307,49 +1220,19 @@
                     type: 'line',
                     yMin: yVal,
                     yMax: yVal,
-                    borderColor: 'rgba(255, 85, 85, 0.9)', // 濃くはっきりとした横線
+                    borderColor: 'rgba(255, 85, 85, 0.7)',
                     borderWidth: 2,
+                    borderDash: [5, 5],
                     label: {
                         display: true,
-                        content: l,
-                        position: 'start', // 線の左端にラベル表示
-                        backgroundColor: 'rgba(255, 85, 85, 0.9)',
-                        color: 'white',
-                        font: { size: 11, weight: 'bold' },
-                        padding: 4
+                        content: `【目標】${l}`,
+                        position: 'end',
+                        backgroundColor: 'rgba(255, 85, 85, 0.8)',
+                        font: { size: 11 }
                     }
                 };
             }
         });
-
-        let yScaleConf = { grid: { color: '#e6f2f8' }, ticks: { color: '#666' }, offset: true };
-        let unit = "";
-
-        if (isLower) yScaleConf.reverse = true;
-
-        if(isScoreMode) {
-            yScaleConf.min = 0; yScaleConf.max = 6.5; unit = "点";
-            yScaleConf.title = { display: true, text: '評価点（6点満点）', font: {weight: 'bold'} };
-        } else if(isCategory) {
-            yScaleConf.type = 'category'; yScaleConf.labels = criteria[eventVal].ranks;
-            yScaleConf.reverse = true;
-        } else {
-            unit = eventUnits[eventVal] || "";
-            yScaleConf.type = 'linear';
-            // 10mと30mスプリント走 of axis
-            if (eventVal === "10m") {
-                yScaleConf.min = 1.5;
-                yScaleConf.max = 3.0;
-                yScaleConf.ticks.stepSize = 0.1;
-            } else if (eventVal === "30m") {
-                yScaleConf.min = 3.5;
-                yScaleConf.max = 5.5;
-                yScaleConf.ticks.stepSize = 0.1;
-            } else {
-                yScaleConf.grace = '10%';
-            }
-            yScaleConf.ticks.callback = v => (Math.round(v * 100) / 100) + ' ' + unit;
-        }
 
         if(compareLineChartInst) compareLineChartInst.destroy();
         compareLineChartInst = new Chart(document.getElementById('compareLineChart').getContext('2d'), {
@@ -1357,47 +1240,52 @@
             data: { labels: displayLabels, datasets: datasets },
             options: {
                 responsive: true, maintainAspectRatio: false,
-                layout: { padding: { top: 20 } },
+                layout: { padding: { top: 30 } },
                 plugins: {
-                    legend: { position: 'top', labels: { font: { weight: 'bold' } } },
-                    // ここでアノテーション（横線）を適用
+                    legend: { position: 'top', labels: { font: { size: 14 } } },
                     annotation: { annotations: lineAnnotations },
                     datalabels: {
-                        align: 'top', anchor: 'end', offset: 4, font: { weight: 'bold', size: 11 },
-                        formatter: (v) => {
-                            if(v === null) return '';
-                            return isCategory ? v : (Math.round(v*100)/100 + ' ' + unit);
+                        align: 'top', anchor: 'end',
+                        color: function(context) { return context.dataset.borderColor; },
+                        font: { weight: 'bold', size: 12 },
+                        formatter: v => {
+                            if (v === null) return '';
+                            return (typeof v === 'number' ? (Math.round(v*100)/100) : v) + unit;
                         }
                     }
                 },
-                scales: { x: { grid: { color: '#e6f2f8' } }, y: yScaleConf }
+                scales: {
+                    x: { grid: { color: '#e6f2f8' } },
+                    y: {
+                        grid: { color: '#e6f2f8' },
+                        reverse: isLower,
+                        type: isCategory ? 'category' : 'linear',
+                        labels: isCategory ? criteria[eventName].ranks : undefined,
+                        title: { display: unit !== "", text: `単位：${unit}`, font: { size: 12 } }
+                    }
+                }
             }
         });
     }
 
-    // ==============================================
-    // 個票印刷ビュー アップデート
-    // ==============================================
     function updatePrintView() {
         if(allData.length === 0) return;
-
+        
         const player = document.getElementById('print-player').value;
         const month = document.getElementById('print-month').value;
-
-        // --- ヘッダーメタデータの変更 ---
+        
         document.getElementById('print-meta-player').textContent = player;
         document.getElementById('print-meta-month').textContent = month;
 
-        // --- 予想球速の算出 ---
         const avgScore = getOverallAvgScore(player, month);
-        const printSpeed = document.getElementById('print-meta-speed');
+        const speedDisplay = document.getElementById('print-meta-speed');
         if (avgScore !== null) {
-            printSpeed.innerHTML = `⚾ 予想球速: ${estimatePitchSpeed(avgScore)} km/h`;
+            const estimatedSpeed = estimatePitchSpeed(avgScore);
+            speedDisplay.innerHTML = `⚾ 予想球速: <b>${estimatedSpeed}</b> km/h (平均点: ${avgScore.toFixed(2)})`;
         } else {
-            printSpeed.innerHTML = `⚾ 予想球速: -- km/h`;
+            speedDisplay.innerHTML = `⚾ 予想球速: -- km/h`;
         }
 
-        // --- 個票用レーダーチャートの描画 ---
         const groups = Object.keys(eventGroups);
         const radarData = groups.map(g => getGroupAvgScore(player, month, g) || 0);
 
@@ -1407,20 +1295,18 @@
             data: {
                 labels: groups,
                 datasets: [{
-                    label: `${player} (${month})`,
+                    label: '点数',
                     data: radarData,
                     backgroundColor: 'rgba(0, 136, 204, 0.2)',
-                    borderColor: '#0088cc',
-                    pointBackgroundColor: '#0088cc',
-                    pointRadius: 4,
-                    borderWidth: 2
+                    borderColor: '#0088cc', pointBackgroundColor: '#0088cc',
+                    pointRadius: 3, borderWidth: 2
                 }]
             },
             options: {
                 responsive: true, maintainAspectRatio: false,
                 scales: {
                     r: {
-                        min: 0, max: 6, ticks: { stepSize: 1, backdropColor: 'transparent' },
+                        min: 0, max: 6, ticks: { stepSize: 1, display: false }, 
                         grid: { color: '#e6f2f8' }, angleLines: { color: '#e6f2f8' },
                         pointLabels: { font: { size: 10, weight: 'bold' }, color: '#333' }
                     }
@@ -1435,33 +1321,28 @@
             }
         });
 
-        // --- 個票用 分野別平均点推移（折れ線グラフ）の描画 ---
-        // 過去のすべての測定月の各分野の推移を並べる
-        const lineLabels = availableMonths.map(m => parseInt(m.split('-')[1]) + '月');
-        const groupDatasets = [];
+        const endD = new Date(month + '-01');
+        const startD = new Date(endD);
+        startD.setMonth(startD.getMonth() - 5);
         
-        // 5つのグループごとのカラーマップ
-        const groupColors = {
-            "フィジカル分野": "#0088cc",
-            "プライオ分野": "#ff7733",
-            "筋力分野": "#33cc66",
-            "スプリント分野": "#9933cc",
-            "可動域分野": "#ff3366"
-        };
+        const startStr = `${startD.getFullYear()}-${String(startD.getMonth()+1).padStart(2,'0')}`;
+        const lineLabels = generateMonthRange(startStr, month);
+        const displayLabels = lineLabels.map(l => parseInt(l.split('-')[1]) + '月');
 
-        groups.forEach(g => {
-            const data = availableMonths.map(m => {
+        const groupDatasets = [];
+        groups.forEach((g, i) => {
+            const color = palette[i % palette.length];
+            const gData = lineLabels.map(m => {
                 const s = getGroupAvgScore(player, m, g);
                 return s !== null ? Math.round(s * 100) / 100 : null;
             });
-
             groupDatasets.push({
-                label: g.replace("分野", ""),
-                data: data,
-                backgroundColor: hexToRgba(groupColors[g] || '#888', 0.1),
-                borderColor: groupColors[g] || '#888',
+                label: g,
+                data: gData,
+                borderColor: color,
+                backgroundColor: 'transparent',
                 borderWidth: 2,
-                pointRadius: 4,
+                pointRadius: 2,
                 tension: 0,
                 spanGaps: true
             });
@@ -1471,7 +1352,7 @@
         printGroupLineChartInst = new Chart(document.getElementById('printGroupLineChart').getContext('2d'), {
             type: 'line',
             data: {
-                labels: lineLabels,
+                labels: displayLabels,
                 datasets: groupDatasets
             },
             options: {
@@ -1480,12 +1361,7 @@
                 plugins: {
                     legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } },
                     datalabels: {
-                        align: 'top', anchor: 'end', offset: 2,
-                        color: function(context) {
-                            return context.dataset.borderColor;
-                        },
-                        font: { weight: 'bold', size: 9 },
-                        formatter: v => (v !== null && v > 0) ? v : ''
+                        display: false 
                     }
                 },
                 scales: {
@@ -1495,56 +1371,67 @@
             }
         });
 
-        // --- 全種目の記録テーブルの生成 ---
         const tableContainer = document.getElementById('print-table-container');
-        tableContainer.innerHTML = generatePrintTableHtml(player, month);
-    }
-
-    // 印刷用の2列テーブルを構築する
-    function generatePrintTableHtml(player, month) {
-        const row = allData.find(d => d['氏名'] === player && d['測定月'] === month);
-        if (!row) return '<p style="text-align:center; padding: 20px; color:#ff5555;">選択した期間の測定データがありません。</p>';
-
-        const allEvents = [];
-        for (const [groupName, events] of Object.entries(eventGroups)) {
-            events.forEach(ev => {
-                const val = row[ev] !== undefined && row[ev] !== "" ? row[ev] : "-";
-                const score = calculateScore(ev, row[ev]);
-                const scoreText = score !== null ? score + "点" : "-";
-                const unit = eventUnits[ev] || "";
-                const valText = val !== "-" ? val + " " + unit : "-";
-                allEvents.push({ group: groupName, name: ev, val: valText, score: scoreText });
+        tableContainer.innerHTML = '';
+        
+        const table = document.createElement('table');
+        table.className = 'print-records-table';
+        
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        headerRow.innerHTML = '<th>分野</th><th>種目</th><th>記録</th><th>点数</th><th>基準(130k)</th>';
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        
+        const tbody = document.createElement('tbody');
+        const rowData = allData.find(d => d['氏名'] === player && d['測定月'] === month);
+        
+        groups.forEach(g => {
+            const events = eventGroups[g];
+            events.forEach((ev, idx) => {
+                const tr = document.createElement('tr');
+                
+                if(idx === 0) {
+                    const tdGroup = document.createElement('td');
+                    tdGroup.rowSpan = events.length;
+                    tdGroup.textContent = g.replace('分野','');
+                    tdGroup.style.fontWeight = 'bold';
+                    tdGroup.style.backgroundColor = '#fdfdfd';
+                    tr.appendChild(tdGroup);
+                }
+                
+                const tdEvent = document.createElement('td');
+                tdEvent.textContent = ev;
+                tr.appendChild(tdEvent);
+                
+                const val = rowData ? rowData[ev] : null;
+                const tdVal = document.createElement('td');
+                tdVal.textContent = val !== null && val !== "" ? val + (eventUnits[ev] || "") : "-";
+                tr.appendChild(tdVal);
+                
+                const score = calculateScore(ev, val);
+                const tdScore = document.createElement('td');
+                tdScore.textContent = score !== null ? score : "-";
+                if(score !== null) {
+                    if(score >= 5) tdScore.style.color = '#ff5555';
+                    else if(score <= 2) tdScore.style.color = '#0088cc';
+                }
+                tdScore.style.fontWeight = 'bold';
+                tr.appendChild(tdScore);
+                
+                const tdCrit = document.createElement('td');
+                const crit = criteria[ev];
+                tdCrit.textContent = crit ? crit[130] + (eventUnits[ev] || "") : "-";
+                tdCrit.style.color = '#888';
+                tr.appendChild(tdCrit);
+                
+                tbody.appendChild(tr);
             });
-        }
-
-        // テーブルを2分割（左右の幅を揃えてA4高さを抑える）
-        const mid = Math.ceil(allEvents.length / 2);
-        const leftSide = allEvents.slice(0, mid);
-        const rightSide = allEvents.slice(mid);
-
-        const renderHalfTable = (items) => {
-            let html = '<table class="print-records-table">';
-            html += '<thead><tr><th>分野</th><th>測定種目</th><th>測定記録</th><th>スコア</th></tr></thead><tbody>';
-            items.forEach(item => {
-                html += `<tr>
-                    <td style="color:#666; font-size:0.75rem;">${item.group.replace("分野", "")}</td>
-                    <td style="font-weight:bold; text-align:left;">${item.name}</td>
-                    <td style="font-weight:bold; color:#333;">${item.val}</td>
-                    <td style="font-weight:bold; color:var(--accent-hover); font-size:0.9rem;">${item.score}</td>
-                </tr>`;
-            });
-            html += '</tbody></table>';
-            return html;
-        };
-
-        return `
-            <div style="display: flex; gap: 20px; width: 100%;">
-                <div style="flex: 1; width: 50%;">${renderHalfTable(leftSide)}</div>
-                <div style="flex: 1; width: 50%;">${renderHalfTable(rightSide)}</div>
-            </div>
-        `;
+        });
+        
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
     }
 </script>
-
 </body>
 </html>
